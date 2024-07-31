@@ -10,9 +10,12 @@ const fetchWeatherData=async(city)=>{
 
 fetchWeatherData('bahirdar').then((data)=>{
     console.log(data.days[0].hours[0].conditions);
-    console.log(data.days[0].hours[0].icon);
+    const iconUrl=data.days[0].hours[0].icon;
     console.log((data['days'].length));
-});
+    return iconUrl;
+}).then ((url)=>translateWeatherToGif(url)).then(urls=>{
+
+    console.log(urls.data.url)});
 
 const translateWeatherToGif=async (weather)=>{
  const baseUrl="https://api.giphy.com/v1/gifs/translate";
@@ -25,7 +28,5 @@ const url= `${baseUrl}?api_key=${API_KEY}&s=${weather}`;
 
 }
 
-translateWeatherToGif('rain').then(urls=>{
 
-    console.log(urls.data.url)});
 
