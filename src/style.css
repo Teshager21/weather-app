@@ -4,6 +4,20 @@
     box-sizing: border-box;
 }
 
+#locationInput{
+    width: 25%;
+    height: 3rem;
+    margin:auto;
+}
+
+.btn{
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 1rem;
+
+}
 
 .weather-gif{
  width: 25vw;
