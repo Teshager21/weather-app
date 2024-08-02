@@ -4,10 +4,30 @@
     box-sizing: border-box;
 }
 
+ul li{
+    list-style: none;
+}
+
+ul li:hover{
+    background-color: orange;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    padding-left: 3rem;
+}
+
 #locationInput{
     width: 25%;
     height: 3rem;
     margin:auto;
+}
+
+.suggestions{
+    box-shadow: 5px 0 5px 0 rgb(0,0,0,0.2);
+    /* border:1px solid orange; */
+    width:10rem;
 }
 
 .btn{

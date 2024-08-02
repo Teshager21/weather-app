@@ -7,10 +7,13 @@
     <body>
         <div class="container">
             <h1>This is a weather app</h1>
-            <nav>
-               <input type="search" name="location" id="locationInput">
+            <div class="search-bar">
+               <input type="search" name="location" id="locationInput" placeholder="City">
                <input type="button" value="search" class="btn" id="searchBtn">
-            </nav>
+               <ul class="suggestions">
+
+               </ul>
+            </div>
             <div  class="weather-gif">
                 <img src="./src/assets/loading.gif" alt="" srcset="">
             </div>
