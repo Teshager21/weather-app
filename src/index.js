@@ -13,9 +13,9 @@ loadingGif.classList.add('loading');
 
 suggestionsList.addEventListener('click',(e)=>{
     if(e.target.nodeName==='LI') {
-        console.log(e.target.textContent,'clicked',e.target.nodeName)
         locationInput.value=e.target.textContent;
         suggestionsList.innerHTML='';
+        serveWeatherData();
     }
 })
 
@@ -34,7 +34,7 @@ const fetchWeatherData=async(city)=>{
 const translateWeatherToGif=async (weather)=>{
  const baseUrl="https://api.giphy.com/v1/gifs/translate";
  const API_KEY="E03DHQa08uJqlEZKuJh8Jzlpnyq3D52f";
-const url= `${baseUrl}?api_key=${API_KEY}&s=${weather}`;
+const url= `${baseUrl}?api_key=${API_KEY}&s=${weather} weather`;
 
  const rawData=await fetch(url);
  const parsedData= await rawData.json();
@@ -43,29 +43,33 @@ const url= `${baseUrl}?api_key=${API_KEY}&s=${weather}`;
 }
 
 
-document.getElementById('searchBtn').addEventListener('click',()=>{
+document.getElementById('searchBtn').addEventListener('click',()=>serveWeatherData());
+
+const serveWeatherData=()=>{
     location=locationInput.value;
-    fetchWeatherData(location).then((data)=>{
-        weatherCondition=data.days[0].hours[0].conditions;
-        const iconUrl=data.days[0].hours[0].icon;
-        return iconUrl;
-    }).then ((url)=>translateWeatherToGif(url)).then(urls=>{
-        const weatherImg= document.createElement('iframe')
-        weatherImg.src=urls.data.embed_url;
-        weatherImg.setAttribute('alt',urls.data.embed_url);
-        const weatherGif= document.querySelector('.weather-gif');
-        weatherGif.innerHTML='';
-        weatherGif.append(weatherImg);
-        const conditionHeading= document.createElement('h2');
-        conditionHeading.textContent=`The condition in ${location} is ${weatherCondition}`;
-        weatherGif.append(conditionHeading);
-    })
-})
+    fetchWeatherData(location)
+        .then((data)=>grabUrlFromWeatherData(data))
+        .then ((url)=>translateWeatherToGif(url))
+        .then((urls)=>displayWeatherData(urls));
+}
 
+const grabUrlFromWeatherData=(data)=>{
+    weatherCondition=data.days[0].hours[0].conditions;
+    const iconUrl=data.days[0].hours[0].icon;
+    return iconUrl;   
+}
 
-//fetch list of cities
-
-
+const displayWeatherData=(urls)=>{
+    const weatherImg= document.createElement('iframe')
+    weatherImg.src=urls.data.embed_url;
+    weatherImg.setAttribute('alt',urls.data.embed_url);
+    const weatherGif= document.querySelector('.weather-gif');
+    weatherGif.innerHTML='';
+    weatherGif.append(weatherImg);
+    const conditionHeading= document.createElement('h2');
+    conditionHeading.textContent=`The condition in ${location} is ${weatherCondition}`;
+    weatherGif.append(conditionHeading);  
+}
 const fetchAllLocationNames=async()=>{
  const locations= await fetch('https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json')
  const locationsParsed= await locations.json();
