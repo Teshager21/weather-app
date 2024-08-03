@@ -8,7 +8,8 @@
 nav{
     display: flex;
     padding-top: 0.5rem;
-    background-color: rgb(0,0,0,0.1);
+    background-color: #1992d4;
+    color: white;
     padding-left: 1rem;
     padding-bottom: 0.5rem;
 }
@@ -107,10 +108,14 @@ ul li:hover{
     padding-left: 1rem;
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
-    font-size: 1rem;
-    border:1px solid rgb(0,0,0,0.2);
+    font-size: 1.2rem;
+    border:1px solid #1992d4;
     border-left:none;
     font-size: 1rem;
+    background-color: #1992d4;
+    color: #fff;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
 
 }
 
