@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Webpack App</title>
+    <script defer src="main.js"></script></head>
+    <body>
+        <div class="container">
+            <nav>
+                <h1>Weather</h1>
+            </nav>
+           
+            <div class="main">
+                <div class="search-bar">
+                    <div class="search-form">
+                        <input type="search" name="location" id="locationInput" placeholder="City">
+                        <input type="button" value="search" class="btn" id="searchBtn">
+                    </div>
+                  
+                    <p id="resolvedAddress"></p>
+                    <ul class="suggestions">
+     
+                    </ul>
+                 </div>
+                 <div class='data'>
+                    <div  class="weather-gif">
+                        <img src="./src/assets/loading.gif" alt="" srcset="">
+                     
+                    </div>
+                    <ul class="details"></ul>
+                 </div>
+                 
+            </div>
+          
+            
+           
+
+        </div>
+    </body>
+    
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker
+                    .register("service-worker.js")
+                    .then((registration) => {
+                        console.log("Service Worker registered: ", registration);
+                    })
+                    .catch((registrationError) => {
+                        console.error("Service Worker registration failed: ", registrationError);
+                    });
+            });
+        }
+    </script>
+</html>
