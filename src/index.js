@@ -39,9 +39,7 @@ const fetchWeatherData=async(city)=>{
 
 const translateWeatherToGif=async (weather)=>{
  const baseUrl="https://api.giphy.com/v1/gifs/translate";
-
-const url= `${baseUrl}?api_key=${API_KEY}&s=${weather}weather`;
-
+ const url= `${baseUrl}?api_key=${API_KEY}&s=${weather}weather`;
  const rawData=await fetch(url);
  const parsedData= await rawData.json();
  return parsedData;
@@ -52,8 +50,6 @@ const url= `${baseUrl}?api_key=${API_KEY}&s=${weather}weather`;
 document.getElementById('searchBtn').addEventListener('click',()=>serveWeatherData(locationInput.value));
 
 const serveWeatherData=(location)=>{
-    // location=locationInput.value;
-    console.log('location is',location);
     fetchWeatherData(location)
         .then((data)=>grabUrlFromWeatherData(data))
         .then ((url)=>translateWeatherToGif(url))
@@ -68,18 +64,20 @@ const grabUrlFromWeatherData=(data)=>{
     const precipitation= document.createElement('li');
     temprature.textContent='Temprature: ' + data.currentConditions.temp;
     humidity.textContent='Humidity: ' + data.currentConditions.humidity;
+    console.log(data.currentConditions.icon);
     precipitation.textContent='Precipitation: ' + data.currentConditions.precip;
     resolvedAddress.textContent=data.resolvedAddress;
     weatherCondition=data.currentConditions.conditions;
     weatherDescription=data.description;
-    const iconUrl=data.days[0].hours[0].icon;
+    // const iconUrl=data.days[0].hours[0].icon;
+    const iconUrl=data.currentConditions.icon;
     details.append(temprature,humidity,precipitation);
     return iconUrl;   
 }
 
 const displayWeatherData=(urls)=>{
     const weatherImg= document.createElement('iframe');
-    weatherImg.src=urls.data.embed_url;
+    weatherImg.src=urls.data.embed_url;q
     weatherImg.setAttribute('alt',urls.data.embed_url);
     const weatherGif= document.querySelector('.weather-gif');
     weatherGif.innerHTML='';
@@ -134,7 +132,6 @@ const getCurrentLocation=()=>{
         getCityName(position);
     });     
 }
-// let currentCity='';
 const getCityName=async (position)=>{
 const longitude= position.coords.longitude;
 const latitude= position.coords.latitude;
@@ -143,13 +140,10 @@ const url =`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${
  const parsedData= await rawData.json();
  location=parsedData.city;
  serveWeatherData(location);
- console.log('city name',location);
 }
 
-
-// getCityName(37.42159,-122.0837);
 getCurrentLocation();
-// serveWeatherData(currentCity);
+
 
 
 
