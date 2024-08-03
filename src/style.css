@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: sans-serif;
 }
 
 nav{
@@ -12,21 +13,56 @@ nav{
     padding-bottom: 0.5rem;
 }
 
+.data{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 body{
     position:relative;
 }
 .main{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows:1fr;
+    height: 93vh;
+}
+
+.search-form{
+    display: flex;
+}
+
+.details{
+    /* background-color: orange; */
+    font-size: 1rem;
+    font-weight: bolder;
+    display: flex;
+    justify-content: space-around;
+}
+
+.details li{
+    font-size: 1rem;
+    font-weight: bold;
+    /* border-top:1px solid rgb(0,0,0,0.2); */
+    margin-right: 1rem;
+    
+}
+
+#resolvedAddress{
+    font-style: italic;
 }
 .search-bar{
     position: relative; 
     grid-column: 1/2;
     display: flex;
+    flex-direction: column;
     /* align-content: center; */
     justify-content: center;
     align-items: center;
-    gap: 0rem;
+    gap: 1rem;
+    border:1px solid rgb(0,0,0,0.1);
 }
 
 ul li{
@@ -79,6 +115,7 @@ ul li:hover{
 }
 
 .weather-gif{
+    /* padding-top: 1rem; */
  width: 50vw;
  height: 25vw;
  grid-column: 2/-1;
@@ -86,6 +123,17 @@ ul li:hover{
  flex-direction: column;
  align-items: center;
  justify-content: center;
+ gap: 1rem;
+ /* border:1px solid rgb(0,0,0,0.2); */
+}
+.weather-gif h2{
+    margin-bottom: -0.75rem;
+}
+.weather-gif small{
+    padding-bottom: 1rem;
+    padding-top: -1rem;
+    font-size: 1rem;
+    font-style: italic;
 }
 .loading{
     width: 5rem;
